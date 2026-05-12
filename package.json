@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "name": "@samchon/sponsor-images",
+  "version": "0.0.0",
+  "description": "Sponsor image generator.",
+  "homepage": "https://github.com/samchon/sponsor-images#readme",
+  "bugs": {
+    "url": "https://github.com/samchon/sponsor-images/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samchon/sponsor-images"
+  },
+  "license": "MIT",
+  "author": "Jeongho Nam",
+  "scripts": {
+    "prepare": "node build/env.js",
+    "start": "sponsorkit --force"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "sponsorkit": "^17.1.0",
+    "typescript": "^6.0.3"
+  }
+}

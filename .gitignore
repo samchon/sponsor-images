@@ -1,0 +1,4 @@
+.sponsorkit-cache/
+node_modules/
+
+.env

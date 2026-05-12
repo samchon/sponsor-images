@@ -1,0 +1,40 @@
+name: Scheduler
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-sponsors:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: touch .env.local
+      - run: npm ci
+
+      - name: Update sponsors
+        run: npm start
+        env:
+          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORKIT_GITHUB_TOKEN }}
+          SPONSORKIT_GITHUB_LOGIN: samchon
+          SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.SPONSORKIT_OPENCOLLECTIVE_KEY }}
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Sponsor Bot
+          author_email: bot@typia.io
+          message: "chore: update sponsor images"
+          add: "public/*.svg"
